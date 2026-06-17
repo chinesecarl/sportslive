@@ -22,6 +22,16 @@ ET = pytz.timezone('US/Eastern')
 REFRESH_SECONDS = 30
 MAX_RETRIES = 3
 CACHE_TTL = 300
+# Load .env file (Render Secret File / local fallback)
+for _dotenv_path in ('.env', '/etc/secrets/.env', '/etc/secrets/env'):
+    if os.path.exists(_dotenv_path):
+        with open(_dotenv_path) as _f:
+            for _line in _f:
+                _line = _line.strip()
+                if _line and not _line.startswith('#'):
+                    _k, _, _v = _line.partition('=')
+                    os.environ.setdefault(_k.strip(), _v.strip())
+
 ODDS_API_KEY = os.getenv("ODDS_API_KEY", "")
 RUNDOWN_API_KEY = os.getenv("RUNDOWN_API_KEY", "")
 FOOTBALL_DATA_API_KEY = os.getenv("FOOTBALL_DATA_API_KEY", "")
