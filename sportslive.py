@@ -857,11 +857,13 @@ td,th{{padding:8px 10px;text-align:left;border-bottom:1px solid #2a2a2a}}
 .scheduled{{color:#5a5a5a}}
 .dim{{color:#5a5a5a;font-size:0.85em}}
 .footer{{margin-top:20px;color:#5a5a5a;font-size:0.75em;text-align:center}}
+.ver{{color:#3a3a3a;font-size:0.65em;text-align:center}}
 @media(max-width:640px){{body{{padding:10px}}table{{font-size:.78em;display:block;overflow-x:auto;white-space:nowrap}}td,th{{padding:5px 4px}}h1{{font-size:1.1em}}.wp{{font-size:.75em}}.home,.away{{width:auto}}}}
 </style>
 </head>
 <body><h1>{name.upper()}</h1>
 <p class="sub">{subtitle}</p>
+<p class="ver">v2</p>
 <table>{rows}</table>
 <p class="footer">sportslive</p>
 <script>window.addEventListener('beforeunload',()=>navigator.sendBeacon('/shutdown'))</script>
