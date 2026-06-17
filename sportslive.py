@@ -16,6 +16,7 @@ from rich import box
 
 console = Console()
 TZ = pytz.timezone('Europe/Berlin')
+# Cloud deploy: https://github.com/chinesecarl/sportslive
 ET = pytz.timezone('US/Eastern')
 
 REFRESH_SECONDS = 30
