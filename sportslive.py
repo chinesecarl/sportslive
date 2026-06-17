@@ -16,7 +16,6 @@ from rich import box
 
 console = Console()
 TZ = pytz.timezone('Europe/Berlin')
-# Cloud deploy: https://github.com/chinesecarl/sportslive
 ET = pytz.timezone('US/Eastern')
 
 REFRESH_SECONDS = 30
@@ -857,13 +856,12 @@ td,th{{padding:8px 10px;text-align:left;border-bottom:1px solid #2a2a2a}}
 .scheduled{{color:#5a5a5a}}
 .dim{{color:#5a5a5a;font-size:0.85em}}
 .footer{{margin-top:20px;color:#5a5a5a;font-size:0.75em;text-align:center}}
-.ver{{color:#3a3a3a;font-size:0.65em;text-align:center}}
+
 @media(max-width:640px){{body{{padding:10px}}table{{font-size:.78em;display:block;overflow-x:auto;white-space:nowrap}}td,th{{padding:5px 4px}}h1{{font-size:1.1em}}.wp{{font-size:.75em}}.home,.away{{width:auto}}}}
 </style>
 </head>
 <body><h1>{name.upper()}</h1>
 <p class="sub">{subtitle}</p>
-<p class="ver">v2</p>
 <table>{rows}</table>
 <p class="footer">sportslive</p>
 <script>window.addEventListener('beforeunload',()=>navigator.sendBeacon('/shutdown'))</script>
@@ -904,18 +902,6 @@ def serve(path, name, soc, f1, serve_mode="live", cloud_mode=False):
                 self.end_headers()
                 self.wfile.write(html.encode('utf-8'))
                 Handler.last_request_time = time.time()
-            elif self.path == '/debug':
-                out = []
-                out.append(f"ODDS_API_KEY set: {'YES' if os.environ.get('ODDS_API_KEY') else 'NO'}")
-                out.append(f"RUNDOWN_API_KEY set: {'YES' if os.environ.get('RUNDOWN_API_KEY') else 'NO'}")
-                out.append(f"FOOTBALL_DATA_API_KEY set: {'YES' if os.environ.get('FOOTBALL_DATA_API_KEY') else 'NO'}")
-                out.append(f"SPORT={os.environ.get('SPORT', 'not set')}")
-                for p in ('.env', '/etc/secrets/.env', '/etc/secrets/env'):
-                    out.append(f"{p} exists: {os.path.exists(p)}")
-                self.send_response(200)
-                self.send_header('Content-type', 'text/plain')
-                self.end_headers()
-                self.wfile.write('\n'.join(out).encode())
             elif self.path == '/health':
                 self.send_response(200)
                 self.send_header('Content-type', 'text/plain')
