@@ -905,7 +905,6 @@ def serve(path, name, soc, f1, serve_mode="live", cloud_mode=False):
                 self.wfile.write(html.encode('utf-8'))
                 Handler.last_request_time = time.time()
             elif self.path == '/debug':
-                import subprocess
                 out = []
                 out.append(f"ODDS_API_KEY set: {'YES' if os.environ.get('ODDS_API_KEY') else 'NO'}")
                 out.append(f"RUNDOWN_API_KEY set: {'YES' if os.environ.get('RUNDOWN_API_KEY') else 'NO'}")
